@@ -25,49 +25,53 @@
 - **Data Augmentation with Error Analysis**
 
 ## EDA
-- Cow Dataset vs Pig dataset
-
+### Cow Dataset vs Pig dataset
 ||PIG|COW|
 |---|---|---|
 |Image 개수|4303|12152|
-    - Data의 분포가 "Cow : Pig = 3 : 1"
-    - Train / Valid split할 경우, 골고루 분포하도록 진행
+- Data의 분포가 "Cow : Pig = 3 : 1"
+- **Train / Valid split할 경우, 골고루 분포하도록 진행**
     
-
-
+### Image size 분포
+||Pig Image Size|Cow Image Size|
+|---|---|---|
+|1920x1080|3131|12152|
+|1280x960|1172|0|
+- 대부분의 Image의 크기는 1920x1080
+- Pig Data에서 일부 image의 크기가 1280x960
+- **좌표변환 적용시, Image size를 고려하여 변환**
     
-    
-- Image size 분포
-![2](https://user-images.githubusercontent.com/53552847/152643871-0031c5f0-3618-4c22-9c03-acf16751f162.PNG)
-    - 대부분의 Image의 크기는 1920x1080
-    - Pig Data에서 일부 image의 크기가 1280x960
-    - 좌표변환 적용시, Image size를 고려하여 변환
-    
-- Box의 개수에 따른 분포
+### Box의 개수에 따른 분포
 ![3](https://user-images.githubusercontent.com/53552847/152643870-b34f9ba1-7921-4aae-ad7d-1777d2d819ae.PNG)
-    - pig data와 cow data에서 Box의 개수가 서로 상이하게 분포
-    - Train / Valid split할 경우, 각 image별로 가지는 Box의 개수에 따라서 골고루 분포할 수 있도록 진행.
+- pig data와 cow data에서 Box의 개수가 서로 상이하게 분포
+- **Train / Valid split할 경우, 각 image별로 가지는 Box의 개수에 따라서 골고루 분포할 수 있도록 진행.**
     
-- Box의 비율에 따른 분포
+### Box의 비율에 따른 분포
 ![4](https://user-images.githubusercontent.com/53552847/152643869-7cae1b57-88f4-42f8-a672-4c6fc52ec58a.PNG)
-    - pig data와 cow data에서 Box의 비율은 유사
-    - Train / Valid split할 경우, Random split 진행
+- pig data와 cow data에서 Box의 비율은 유사
+- **Train / Valid split할 경우, 각 image별로 가지는 Box의 비율에 따라서 골고루 분포할 수 있도록 진행.**
     
-- Box의 크기에 따른 분포
+### Box의 크기에 따른 분포
 ![5](https://user-images.githubusercontent.com/53552847/152643868-60c61f6e-e9b4-478b-9214-2c07199bf2be.PNG)
-    - pig data, cow data 모두 small size bounding box (넓이: 1000~10000)의 개수가 상대적으로 적음.
-    - small size bounding box를 지울 것인가? => 선택의 문제 (본 과정에서는 지우지 않음)
-- Small size bounding box에 대한 세밀한 분포 조사
+- pig data, cow data 모두 small size bounding box (넓이: 1000~10000)의 개수가 상대적으로 적음.
+- **small size bounding box를 지울 것인가? => 선택의 문제 (본 과정에서는 지우지 않음)**
+
+### Small size bounding box에 대한 세밀한 분포 조사
 ![6](https://user-images.githubusercontent.com/53552847/152643866-7a4fea1d-6901-4bb1-b8bd-b0dedadf5ef2.PNG)
-![7](https://user-images.githubusercontent.com/53552847/152643865-0323eb43-4a2c-4be9-a2e3-20108e8d479b.PNG)
-    - 넓이가 4000이하인 Data의 개수가 pig data 137개, cow data 71개
-    - 전체 Data에 대한 비율 (137 -> 0.003, 71 -> 0.0018). 즉, 0.3%, 0.18%
-    - 넓이가 4000이하인 Bounding Box를 지울 것인가? => 선택의 문제 (본 과정에서는 지우지 않음)
-- Box가 없는 이미지 분포
-![8](https://user-images.githubusercontent.com/53552847/152643948-e6606415-f62c-4016-b356-92900a6266de.PNG)
-    - Cow Image에서 3개 존재
-    - White Noise로 판단하여 삭제하지 않음.
-   
+|넓이가 4000이하인 Data의 개수|PIG|COW|
+|---|---|---|
+|개수|137|71|
+|비율|0.003|0.0018|
+- 넓이가 4000이하인 Data의 개수가 pig data 137개, cow data 71개
+- 전체 Data에 대한 비율 (137 -> 0.003, 71 -> 0.0018). 즉, 0.3%, 0.18%
+- **넓이가 4000이하인 Bounding Box를 지울 것인가? => 선택의 문제 (본 과정에서는 지우지 않음)**
+
+### Box가 없는 이미지 분포
+|Box가 없는 이미지|PIG|COW|
+|---|---|---|
+|개수|0|3|
+- Cow Image에서 3개 존재
+- White Noise로 판단하여 삭제하지 않음.
 
 ## Model
 - YOLOv5m6 Pretrained Model 사용
@@ -81,4 +85,23 @@
 - 최종 사용 Model로서 YOLOv5m6 Pretrained Model 선택
 
 ## MultiLabelStratified KFold
+- PIG / COW의 Data의 개수에 대한 차이
+- Image별 소유하는 Box의 개수에 대한 차이
+- 위 두 Label을 바탕으로 Stratified하게 Train/valid Split 진행
+
+||Cow-Many|Cow-Medium|Cow-Little|Pig-Many|Pig-Medium|Pig-Little|
+|---|---|---|---|---|---|---|
+|Train|2754|1069|5898|2175|855|413|
+|Valid|659|287|1485|574|193|93|
+
+## HyperParameter Tuning
+- Genetic Algorithm을 활용한 HyperParameter Tuning (YOLOv5 default 제공)
+- Runtime의 제약(Colab Pro)으로 인한, Mini Dataset(50% 사용) 제작 및 HyperParameter 개별화 작업진행
+
+## Data Augmentation with Error Analysis
 - 
+
+## 추후 과제
+- MultiLabelStratified KFold를 진행시, 각 이미지가 가지는 Bounding Box의 Ratio, Size에 따른 분류도 함께 진행하기
+- BackGround Image 넣기 => 탐지할 물체가 없는 Image를 추가해줌으로서 False Positive를 줄일 수 있다고 한다.
+- 고도화된 HyperParameter Tuning 기법 적용 (ex, Bayesian Algorithm)
