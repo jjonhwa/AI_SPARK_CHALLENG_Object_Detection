@@ -1,7 +1,7 @@
 # AI_SPARK_CHALLENG_Object_Detection
 제2회 연구개발특구 인공지능 경진대회 AI SPARK 챌린지
 
-😀 225팀 중 13등 (mAP: 0.98116)
+🏅 **Top 5% in mAP(0.75) (225팀 중 13등, mAP: 0.98116)**
 
 ## 대회 설명
 - Edge 환경에서의 가축 Object Detection (Pig, Cow)
