@@ -26,6 +26,7 @@
 
 ## EDA
 - Cow Dataset vs Pig dataset
+
 ||PIG|COW|
 |---|---|---|
 |Image 개수|4303|12152|
