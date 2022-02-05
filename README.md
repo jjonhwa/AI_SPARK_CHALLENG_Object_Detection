@@ -96,7 +96,7 @@
 
 ## HyperParameter Tuning
 - Genetic Algorithm을 활용한 HyperParameter Tuning (YOLOv5 default 제공)
-- Runtime의 제약(Colab Pro)으로 인한, Mini Dataset(50% 사용) 제작 및 HyperParameter 개별화 작업진행
+- Runtime의 제약(Colab Pro)으로 인한, Mini Dataset(50% 사용) 제작 및 HyperParameter Search 개별화 작업진행
 
 ## Data Augmentation with Error Analysis
 - 
