@@ -79,8 +79,8 @@
 
 ||YOLOv5l Pretrained|YOLOv5m6 w/o Pretrained|YOLOv5m6 Pretrained|
 |---|---|---|---|
-|mAP@.5|0.|0.9756|0.9838|
-|mAP@.5:.95|0.|0.8695|0.9156|
+|mAP@.5|0.9806|0.9756|0.9838|
+|mAP@.5:.95|0.9002|0.8695|0.9156|
 
 - 최종 사용 Model로서 YOLOv5m6 Pretrained Model 선택
 
