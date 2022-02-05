@@ -97,9 +97,21 @@
 ## HyperParameter Tuning
 - Genetic Algorithm을 활용한 HyperParameter Tuning (YOLOv5 default 제공)
 - Runtime의 제약(Colab Pro)으로 인한, Mini Dataset(50% 사용) 제작 및 HyperParameter Search 개별화 작업진행
+++HyperParameter Search 개별화 코드 삽입++
+++이전 HyperParameter와 이후 HyperParameter 비교++
+++Adam, AdamW, SGD 비교표 작성++
 
 ## Data Augmentation with Error Analysis
-- 
+++10 epoch 결과값을 바탕으로 Error 분석++
+++Cow Dataset Augmentation++
+
+## 결과
+++Full Dataset 활용++
+++Tuning으로 찾은 HyperParameter 활용++
+++Augmentation Model vs Non Augmentation Model++
+++Non Augmentation Model 활용++
+++Inference Tuning++
+++결과값 비교 표 작성++
 
 ## 추후 과제
 - MultiLabelStratified Split 진행시, 각 이미지가 가지는 Bounding Box의 Ratio, Size에 따른 분류도 함께 진행하기
