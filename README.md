@@ -91,8 +91,8 @@
 
 ||Cow-Many|Cow-Medium|Cow-Little|Pig-Many|Pig-Medium|Pig-Little|
 |---|---|---|---|---|---|---|
-|Train|2754|1069|5898|2175|855|413|
-|Valid|659|287|1485|574|193|93|
+|Train|2739|1097|5886|2190|827|425|
+|Valid|674|259|1497|559|221|81|
 
 ## HyperParameter Tuning
 - Genetic Algorithm을 활용한 HyperParameter Tuning (YOLOv5 default 제공)
