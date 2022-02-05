@@ -21,7 +21,7 @@
 ## Core Strategy
 - **YOLOv5m6 Pretrained Model 사용 (68.3MB)**
 - **MultiLabelStratified KFold (Box count, Class, Box Ratio, Box Size)**
-- **HyperParameter Tuning (with evolve)**
+- **HyperParameter Tuning (with GA Algorithm)**
 - **Data Augmentation with Error Analysis**
 
 ## EDA
