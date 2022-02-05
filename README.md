@@ -102,6 +102,6 @@
 - 
 
 ## 추후 과제
-- MultiLabelStratified KFold를 진행시, 각 이미지가 가지는 Bounding Box의 Ratio, Size에 따른 분류도 함께 진행하기
+- MultiLabelStratified Split 진행시, 각 이미지가 가지는 Bounding Box의 Ratio, Size에 따른 분류도 함께 진행하기
 - BackGround Image 넣기 => 탐지할 물체가 없는 Image를 추가해줌으로서 False Positive를 줄일 수 있다고 한다.
 - 고도화된 HyperParameter Tuning 기법 적용 (ex, Bayesian Algorithm)
