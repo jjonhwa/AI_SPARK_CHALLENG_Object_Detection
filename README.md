@@ -184,9 +184,9 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 |mAP@.5:.95|0.8302|0.8994|0.914|
 
 ### 최종 변경 HyperParameter
-|optimizer|lr0|lrf|momentum|weight_decay|warmup_epochs|warmup_momentum|warmup_bias_lr|box|cls|cls_pw|obj|obj_pw|iou_t|anchor_t|fl_gamma|hsv_h|hsv_s|hsv_v|degrees|translate|scale|shear|perspective|flipud|fliplr|mosaic|mixup|copy_paste|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|SGD|0.009|0.08|0.94|0.001|0.11|0.77|0.0004|0.02|0.2|0.95|0.2|0.5|0.2|4.0|0.0|0.009|0.1|0.9|0.0|0.1|0.5|0.0|0.0|0.0095|0.1|1.0|0.0|0.0|
+|optimizer|lr_scheduler|lr0|lrf|momentum|weight_decay|warmup_epochs|warmup_momentum|warmup_bias_lr|box|cls|cls_pw|obj|obj_pw|iou_t|anchor_t|fl_gamma|hsv_h|hsv_s|hsv_v|degrees|translate|scale|shear|perspective|flipud|fliplr|mosaic|mixup|copy_paste|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|SGD|linear|0.009|0.08|0.94|0.001|0.11|0.77|0.0004|0.02|0.2|0.95|0.2|0.5|0.2|4.0|0.0|0.009|0.1|0.9|0.0|0.1|0.5|0.0|0.0|0.0095|0.1|1.0|0.0|0.0|
 
 ## Error Analysis
 ### 학습 결과 확인
