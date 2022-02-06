@@ -162,6 +162,7 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 
 ### Default HyperParameter vs Tuning HyperParameter
 - obj, box, cls에 대한 HyperParameter에 따른 성능 변화폭 증가
+
 ||Default|Tuning|
 |---|---|---|
 |obj_loss|0.023|0.003|
@@ -174,6 +175,7 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 |mAP@.5:.95|0.8924|0.9016|
 
 - Optimizer
+
 ||Adam|AdamW|SGD|
 |---|---|---|
 |mAP@.5|0.9635|0.9804|0.9848|
