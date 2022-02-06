@@ -201,7 +201,7 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 
 - 위의 표와 같이, Cow의 Data의 양이 PIG의 Data보다 더 많다.
 - YOLOv5 Pretrained Model의 경우 COCO Dataset에서 Cow 이미지를 보유하고 있다.
-- 위의 두 가지 이점에도 불구하고, Model이 Cow Detection에서의 어려움을 겪는다.
+- 위의 두 가지 이점에도 불구하고, **Model이 Cow Detection에서의 어려움을 겪는다.**
 
 ### Box의 개수 및 Plotting
 #### Box의 개수
@@ -248,14 +248,19 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 |Split(Train)|0.9845|0.9215|
 
 ## 회고
-- COCO Dataset에 Cow Image는 우리 Dataset과 상이하지 않을까?
-- Pretrained Weight를 사용하지 않고 Epoch을 늘려 학습했다면 더 좋은 결과로 이어지지 않을까?
-- Silver Dataset을 만드는 과정에 있어서, iou threshold와 confidence threshold를 최적화를 한다면 성능개선으로 이어질 수 있지 않을까?
+- Pretrained Model
+    - COCO Dataset에서의 Cow Image의 형태는 어떠한지? 
+    - Pig(COCO Dataset에 없음)의 경우, 잘 맞췄기 때문에 PreTrained Weight을 사용하지 않고 Epoch을 늘려서 학습하면 더 좋은 결과로 이어지지 않을까?
+- Silver Dataset
+    - Silver Dataset을 만드는 과정에 있어서, IoU Threshold와 Confidence Threshold를 최적화한다면 성능개선으로 이어질 수 있지 않을까? 
+- MultiLabelStratifield SPlit
+    - Bounding Box와 Ratio와 Size에 따른 분류를 함께 진행해보면 어떨까?
+    - 더불어, Bounding Box의 경우, Image가 가지고 있는 Box마다 다른데 이는 어떻게 MultiLabel하게 Split할 수 있을까?   
+- 확실한 방법으로서 기존 Train Dataset에 Cow Image에 대한 Labeling을 직접했다면 성능 개선으로 이어지지 않았을까?!
 
 ## 추후 과제
-- MultiLabelStratified Split 진행시, 각 이미지가 가지는 Bounding Box의 Ratio, Size에 따른 분류도 함께 진행하기
+- MultiLabelStratified Split 진행시, 각 이미지가 가지는 Bounding Box의 Ratio, Size에 따른 분류 방법 연구
 - BackGround Image 넣기 => 탐지할 물체가 없는 Image를 추가해줌으로서 False Positive를 줄일 수 있다고 한다.
 - 고도화된 HyperParameter Tuning 기법 적용 (ex, Bayesian Algorithm)
-- Silver Dataset을 활용할 때, 중복되는 Data에 대하여 Bounding Box만 추가할 경우, 학습 성능의 차이 비교
-- Object Detection에서 SGD가 AdamW보다 좋은 것은 경험적인 결과인가?\
-- Train Dataset에 대한 Silver Dataset을 만들어 이를 추가적으로 학습할 경우 성능 향상으로 이어지는가? (Train Gold + Train Silver)
+- Train Dataset에 대한 Silver Dataset을 만들어 이를 추가적으로 학습할 경우 성능 향상으로 이어지는지 알아보기 (Train Gold + Train Silver)
+- Object Detection에서 SGD가 AdamW보다 좋은 것은 경험적인 결과인지 혹은 연구결과가 있는지 확인하기
