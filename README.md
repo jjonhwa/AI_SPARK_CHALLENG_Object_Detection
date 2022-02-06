@@ -18,6 +18,43 @@
 - [라벨]돼지_bbox.zip: 돼지 annotation 파일
 - 추가적으로, annotation에서의 "categories"의 값과 annotation list의 "category_id"는 소, 돼지 클래스와 무관하므로 이를 활용할 경우 잘못된 결과로 이어질 수 있다.
 
+## Code
+```
++- data (.gitignore) => zip파일만 최초 생성(AI Hub) 후 추가 데이터는 EDA 폴더 코드로부터 생성
+|   +- [라벨]돼지_bbox.zip
+|   +- [라벨]소_bbox.zip
+|   +- [원천]돼지_bbox.zip
+|   +- [원천]소_bbox.zip
+|   +- Train_Dataset.tar (EDA - Make_Dataset_Multilabel.ipynb에서 생성) 
+|   +- Valid_Dataset.tar (EDA - Make_Dataset_Multilabel.ipynb에서 생성)
+|   +- Train_Dataset_Full.tar (EDA - Make_Dataset_Full.ipynb에서 생성)
+|   +- Train_Dataset_mini.tar (EDA - Make_Dataset_Mini.ipynb에서 생성)
+|   +- Valid_Dataset_mini.tar (EDA - Make_Dataset_Mini.ipynb에서 생성)
+|   +- plus_image.tar (EDA - Data_Augmentation.ipynb에서 생성)
+|   +- plus_lable.tar (EDA - Data_Augmentation.ipynb에서 생성)
++- data_test (.gitignore) => Inference시 사용할 test data (AI Hub으로부터 다운로드)
+|   +- [원천]돼재_bbox.zip
+|   +- [원천]소_bbox.zip
++- trained_model (.gitignore) => 학습 결과물 저장
+|   +- m6_pretrained_full_b10_e20_hyp_tuning_v1_linear.pt
++- EDA
+|   +- Data_Augmentation.ipynb (Plus Dataset 생성)
+|   +- Data_Checking.ipynb (Error Analysis)
+|   +- EDA.ipynb
+|   +- Make_Dataset_Multilabel.ipynb (Train / Valid Dataset 생성)
+|   +- Make_Dataset_Full.ipynb (Train + Valid Dataset 생성)
+|   +- Make_Dataset_Mini.ipynb (Train mini / Valid mini Dataset 생성)
++- hyp
+|   +- experiment_hyp_v1.yaml (최종 HyperParameter)
++- exp
+|   +- hyp_train.py (본 코드와 같이 수정하여, 여러 실험 진행)
+|   +- YOLOv5_hp_search_lr_momentum.ipynb (HyperParameter Tuning with mini dataset)
++- train
+|   +- YOLOv5_ExpandDataset_hp_tune.ipynb (Plus Dataset을 활용하여 학습)
+|   +- YOLOv5_FullDataset_hp_tune.ipynb (최종 결과물 생성)
+|   +- YOLOv5_MultiLabelSplit.ipynb (초기 학습 코드)
++- YOLOv5_inference.ipynb
+```
 ## Core Strategy
 - **YOLOv5m6 Pretrained Model 사용 (68.3MB)**
 - **MultiLabelStratified KFold (Box count, Class, Box Ratio, Box Size)**
