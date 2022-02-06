@@ -1,7 +1,7 @@
 # AI_SPARK_CHALLENG_Object_Detection
 제2회 연구개발특구 인공지능 경진대회 AI SPARK 챌린지
 
-🏅 **Top 5% in mAP(0.75) (225팀 중 13등, mAP: 0.98116)**
+🏅 **Top 5% in mAP(0.75) (443명 중 13등, mAP: 0.98116)**
 
 ## 대회 설명
 - **Edge 환경에서의 가축 Object Detection (Pig, Cow)**
@@ -221,25 +221,41 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
     - **학습된 Model로 Cow Image에 대하여 Bounding Box를 예측한다.**
     - **예측된 결과를 추가학습데이터로 활용한다.** 
 
-## Data Augmentation with Error Analysis
-++Cow Dataset Augmentation++
+## Data Augmentation with Silver Dataset
+- YOLOv5m6 Pretrained with Full_Dataset(Train + Valid) (기존 Dataset으로 학습한 모델 활용)
+- **총 12151개의 Cow Data에 대하여 Detection 진행 (IoU threshod: 0.7, Confidence threshold: 0.05)**
+
+### Bounding Box 개수 시각화
+![12](https://user-images.githubusercontent.com/53552847/152667315-7d2471fe-d363-49e4-a603-e7cde3fcb712.PNG)
+- 위의 시각화자료로 부터, 분석가(본인)의 임의대로 **Bounding Box의 개수가 4개 이상인 Image만 최종 선정**
+- **총 6628개의 Cow에 대한 Silver Dataset 추가**
 
 ## 결과
-++Full Dataset 활용++
-++Tuning으로 찾은 HyperParameter 활용++
-++Augmentation Model vs Non Augmentation Model++
-++Non Augmentation Model 활용++
-++Inference Tuning++
-++결과값 비교 표 작성++
+### 최종 선정 모델
+- Dataset: Train + Valid Dataset을 학습
+- YOLOv5m6 Pretrained Model 활용
+- HyperParameter Tuning (위의 HyperParameter Tuning에서 작성한 표 참고)
+- Inference Tuning (IoU Threshold: 0.68, Confidence Threshold: 0.001)
+
+|Silver Dataset 결과비교|mAP@.75|
+|---|---|
+|최종 모델(w/o Silver Dataset)|0.98116|
+|Plus Model(w Silver Dataset)|0.97965|
+
+|Full vs Split 결과비교|mAP@.5|mAP@.5:.95|
+|---|---|---|
+|Full(Train + Valid)|0.9858|0.9271|
+|Split(Train)|0.9845|0.9215|
 
 ## 회고
 - COCO Dataset에 Cow Image는 우리 Dataset과 상이하지 않을까?
 - Pretrained Weight를 사용하지 않고 Epoch을 늘려 학습했다면 더 좋은 결과로 이어지지 않을까?
-- 
-++Plus Dataset에서 Confidence Threshold가 0.001++
+- Silver Dataset을 만드는 과정에 있어서, iou threshold와 confidence threshold를 최적화를 한다면 성능개선으로 이어질 수 있지 않을까?
 
 ## 추후 과제
 - MultiLabelStratified Split 진행시, 각 이미지가 가지는 Bounding Box의 Ratio, Size에 따른 분류도 함께 진행하기
 - BackGround Image 넣기 => 탐지할 물체가 없는 Image를 추가해줌으로서 False Positive를 줄일 수 있다고 한다.
 - 고도화된 HyperParameter Tuning 기법 적용 (ex, Bayesian Algorithm)
 - Silver Dataset을 활용할 때, 중복되는 Data에 대하여 Bounding Box만 추가할 경우, 학습 성능의 차이 비교
+- Object Detection에서 SGD가 AdamW보다 좋은 것은 경험적인 결과인가?\
+- Train Dataset에 대한 Silver Dataset을 만들어 이를 추가적으로 학습할 경우 성능 향상으로 이어지는가? (Train Gold + Train Silver)
