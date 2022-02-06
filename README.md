@@ -85,8 +85,8 @@
 - 최종 사용 Model로서 YOLOv5m6 Pretrained Model 선택
 
 ## MultiLabelStratified KFold
-- PIG / COW의 Data의 개수에 대한 차이
-- Image별 소유하는 Box의 개수에 대한 차이
+- **PIG / COW의 Data의 개수에 대한 차이**
+- **Image별 소유하는 Box의 개수에 대한 차이**
 - 위 두 Label을 바탕으로 Stratified하게 Train/valid Split 진행
 
 ||Cow-Many|Cow-Medium|Cow-Little|Pig-Many|Pig-Medium|Pig-Little|
