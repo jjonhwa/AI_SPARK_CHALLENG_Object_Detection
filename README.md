@@ -101,8 +101,39 @@
 ++이전 HyperParameter와 이후 HyperParameter 비교++
 ++Adam, AdamW, SGD 비교표 작성++
 
+## Error Analysis
+### 학습 결과 확인
+|Data 양|Train|Valid|
+|PIG|3442|881|
+|COW|9722|2430|
+
+|예측 결과|Label 개수|Precision|Recall|mAP@.5|mAP@.5:.95|
+|PIG|3291|0.984|0.991|0.993|0.928|
+|COW|3291|0.929|0.911|0.974|0.889|
+
+- 위의 표와 같이, Cow의 Data의 양이 PIG의 Data보다 더 많다.
+- YOLOv5 Pretrained Model의 경우 COCO Dataset에서 Cow 이미지를 보유하고 있다.
+- 위의 두 가지 이점에도 불구하고, Model이 Cow Detection에서의 어려움을 겪는다.
+
+### Box의 개수 및 Plotting
+#### Box의 개수
+![9](https://user-images.githubusercontent.com/53552847/152664271-afecf8e4-7987-4e12-bec8-126600e3ba28.PNG)
+
+#### Train - Bounding Box Plotting
+![10](https://user-images.githubusercontent.com/53552847/152664270-e6b4ec2f-6564-41fc-ae9f-f7b36cccc8a3.PNG)
+
+#### Valid - Bounding Box Plotting
+![11](https://user-images.githubusercontent.com/53552847/152664269-9d431af3-55d3-4931-bc17-21957b68f20d.PNG)
+
+### Error 분셕 결과
+- 전반적으로 Cow Dataset에서의 Bounding Box의 개수가 적다.
+- Image를 Plotting한 결과, Cow Dataset에서의 Labeling이 제대로 되어있지 않다.
+    -  FP의 증가로 이어질 수 있다. (Labeling이 되어있지 않지만, Cow라고 예측)
+-  이러한 결과로부터, Silver Dataset을 만들어 재학습시키도록 한다.
+    - 학습된 Model로 Cow Image에 대하여 Bounding Box를 예측한다.
+    - 예측된 결과를 추가학습데이터로 활용한다.    
+
 ## Data Augmentation with Error Analysis
-++10 epoch 결과값을 바탕으로 Error 분석++
 ++Cow Dataset Augmentation++
 
 ## 결과
@@ -114,9 +145,13 @@
 ++결과값 비교 표 작성++
 
 ## 회고
+- COCO Dataset에 Cow Image는 우리 Dataset과 상이하지 않을까?
+- Pretrained Weight를 사용하지 않고 Epoch을 늘려 학습했다면 더 좋은 결과로 이어지지 않을까?
+- 
 ++Plus Dataset에서 Confidence Threshold가 0.001++
 
 ## 추후 과제
 - MultiLabelStratified Split 진행시, 각 이미지가 가지는 Bounding Box의 Ratio, Size에 따른 분류도 함께 진행하기
 - BackGround Image 넣기 => 탐지할 물체가 없는 Image를 추가해줌으로서 False Positive를 줄일 수 있다고 한다.
 - 고도화된 HyperParameter Tuning 기법 적용 (ex, Bayesian Algorithm)
+- Silver Dataset을 활용할 때, 중복되는 Data에 대하여 Bounding Box만 추가할 경우, 학습 성능의 차이 비교
