@@ -209,12 +209,12 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 ![11](https://user-images.githubusercontent.com/53552847/152664269-9d431af3-55d3-4931-bc17-21957b68f20d.PNG)
 
 ### Error 분셕 결과
-- 전반적으로 Cow Dataset에서의 Bounding Box의 개수가 적다.
-- Image를 Plotting한 결과, Cow Dataset에서의 Labeling이 제대로 되어있지 않다.
+- 전반적으로 **Cow Dataset에서의 Bounding Box의 개수가 적다.**
+- Image를 Plotting한 결과, **Cow Dataset에서의 Labeling이 제대로 되어있지 않다.**
     -  FP의 증가로 이어질 수 있다. (Labeling이 되어있지 않지만, Cow라고 예측)
 -  이러한 결과로부터, Silver Dataset을 만들어 재학습시키도록 한다.
-    - 학습된 Model로 Cow Image에 대하여 Bounding Box를 예측한다.
-    - 예측된 결과를 추가학습데이터로 활용한다.    
+    - **학습된 Model로 Cow Image에 대하여 Bounding Box를 예측한다.**
+    - **예측된 결과를 추가학습데이터로 활용한다.** 
 
 ## Data Augmentation with Error Analysis
 ++Cow Dataset Augmentation++
