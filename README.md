@@ -10,6 +10,9 @@
 - 가중치 파일의 용량이 100MB이하이면서 **mAP(IoU 0.75)를 기준으로 순위**를 매긴다.
 - **본 대회의 모든 과정은 Colab Pro 환경에서 진행 및 재현한다.**
 
+### Hardware
+- **Colab Pro (P100 or T4)**
+
 ## Data
 - **AI Hub에서 제공하는 가축 행동 영상 데이터셋 ([다운로드 링크](https://aihub.or.kr/aidata/30734/download))**
 - [원천]소_bbox.zip: 소 image 파일
