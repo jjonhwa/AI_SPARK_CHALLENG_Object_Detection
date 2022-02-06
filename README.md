@@ -113,6 +113,9 @@
 ++Inference Tuning++
 ++결과값 비교 표 작성++
 
+## 회고
+++Plus Dataset에서 Confidence Threshold가 0.001++
+
 ## 추후 과제
 - MultiLabelStratified Split 진행시, 각 이미지가 가지는 Bounding Box의 Ratio, Size에 따른 분류도 함께 진행하기
 - BackGround Image 넣기 => 탐지할 물체가 없는 Image를 추가해줌으로서 False Positive를 줄일 수 있다고 한다.
