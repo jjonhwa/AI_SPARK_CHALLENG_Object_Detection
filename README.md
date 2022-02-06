@@ -68,7 +68,7 @@
 
 ## EDA
 <details>
-    <summary>**자세히**</summary>
+    <summary> **자세히** </summary>
 
 ### Cow Dataset vs Pig dataset
 ||PIG|COW|
@@ -147,7 +147,7 @@
 
 ### Core Code 수정
 <details>
-    <summary>**자세히**</summary>
+    <summary> **자세히** </summary>
 
 ```python
 meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
