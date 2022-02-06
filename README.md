@@ -97,9 +97,88 @@
 ## HyperParameter Tuning
 - Genetic Algorithm을 활용한 HyperParameter Tuning (YOLOv5 default 제공)
 - Runtime의 제약(Colab Pro)으로 인한, Mini Dataset(50% 사용) 제작 및 HyperParameter Search 개별화 작업진행
-++HyperParameter Search 개별화 코드 삽입++
-++이전 HyperParameter와 이후 HyperParameter 비교++
-++Adam, AdamW, SGD 비교표 작성++
+
+### Core Code 
+```python
+meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
+        'lrf': (1, 0.01, 1.0),  # final OneCycleLR learning rate (lr0 * lrf)
+        'momentum': (0.3, 0.6, 0.98),  # SGD momentum/Adam beta1
+        }  # segment copy-paste (probability)
+
+        with open(opt.hyp, errors='ignore') as f:
+            hyp = yaml.safe_load(f)  # load hyps dict
+            if 'anchors' not in hyp:  # anchors commented in hyp.yaml
+                hyp['anchors'] = 3
+
+        # Update할 HyperParameter만 new_hyp에 저장
+        new_hyp = {}
+        for k, v in hyp.items():
+            if k in meta.keys():
+                new_hyp[k] = v
+        
+        opt.noval, opt.nosave, save_dir = True, True, Path(opt.save_dir)  # only val/save final epoch
+        # ei = [isinstance(x, (int, float)) for x in hyp.values()]  # evolvable indices
+        evolve_yaml, evolve_csv = save_dir / 'hyp_evolve.yaml', save_dir / 'evolve.csv'
+        if opt.bucket:
+            os.system(f'gsutil cp gs://{opt.bucket}/evolve.csv {save_dir}')  # download evolve.csv if exists
+
+        for _ in range(opt.evolve):  # generations to evolve
+            if evolve_csv.exists():  # if evolve.csv exists: select best hyps and mutate
+                # Select parent(s)
+                parent = 'single'  # parent selection method: 'single' or 'weighted'
+                x = np.loadtxt(evolve_csv, ndmin=2, delimiter=',', skiprows=1)
+                n = min(5, len(x))  # number of previous results to consider
+                x = x[np.argsort(-fitness(x))][:n]  # top n mutations
+                w = fitness(x) - fitness(x).min() + 1E-6  # weights (sum > 0)
+                if parent == 'single' or len(x) == 1:
+                    # x = x[random.randint(0, n - 1)]  # random selection
+                    x = x[random.choices(range(n), weights=w)[0]]  # weighted selection
+                elif parent == 'weighted':
+                    x = (x * w.reshape(n, 1)).sum(0) / w.sum()  # weighted combination
+
+                # Mutate
+                mp, s = 0.8, 0.2  # mutation probability, sigma
+                npr = np.random
+                npr.seed(int(time.time()))
+                # new_hyp에 있는 HyperParameter에 대해서만 meta값 불러오기
+                g = np.array([meta[k][0] for k in new_hyp.keys()])  # gains 0-1
+                ng = len(meta)
+                v = np.ones(ng)
+                while all(v == 1):  # mutate until a change occurs (prevent duplicates)
+                    v = (g * (npr.random(ng) < mp) * npr.randn(ng) * npr.random() * s + 1).clip(0.3, 3.0)
+                for i, k in enumerate(hyp.keys()):  # plt.hist(v.ravel(), 300)
+                    if k in new_hyp.keys(): # new_hyp에 존재하는 hyperParameter에 대해서만 Update
+                        hyp[k] = float(x[i + 7] * v[i])  # mutate
+
+            # Constrain to limits
+            for k, v in meta.items():
+                hyp[k] = max(hyp[k], v[1])  # lower limit
+                hyp[k] = min(hyp[k], v[2])  # upper limit
+                hyp[k] = round(hyp[k], 5)  # significant digits
+
+            # Train mutation
+            results = train(hyp.copy(), opt, device, callbacks)
+```
+
+### Default HyperParameter vs Tuning HyperParameter
+- obj, box, cls에 대한 HyperParameter에 따른 성능 변화폭 증가
+||Default|Tuning|
+|---|---|---|
+|obj_loss|0.023|0.003|
+|box_loss|0.0095|0.0038|
+|cls_loss|0.00003|0.00001|
+
+||Default|Tuning|
+|---|---|---|
+|mAP@.5|0.9826|0.9824|
+|mAP@.5:.95|0.8924|0.9016|
+
+- Optimizer
+||Adam|AdamW|SGD|
+|---|---|---|
+|mAP@.5|0.9635|0.9804|0.9848|
+|mAP@.5:.95|0.8302|0.8994|0.914|
+
 
 ## Error Analysis
 ### 학습 결과 확인
