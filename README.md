@@ -208,7 +208,7 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 #### Valid - Bounding Box Plotting
 ![11](https://user-images.githubusercontent.com/53552847/152664269-9d431af3-55d3-4931-bc17-21957b68f20d.PNG)
 
-### Error 분셕 결과
+### Error 분석 결과
 - 전반적으로 **Cow Dataset에서의 Bounding Box의 개수가 적다.**
 - Image를 Plotting한 결과, **Cow Dataset에서의 Labeling이 제대로 되어있지 않다.**
     -  FP의 증가로 이어질 수 있다. (Labeling이 되어있지 않지만, Cow라고 예측)
