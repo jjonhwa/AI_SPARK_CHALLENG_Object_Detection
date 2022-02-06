@@ -185,10 +185,12 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 ## Error Analysis
 ### 학습 결과 확인
 |Data 양|Train|Valid|
+|---|---|---|
 |PIG|3442|881|
 |COW|9722|2430|
 
 |예측 결과|Label 개수|Precision|Recall|mAP@.5|mAP@.5:.95|
+|---|---|---|---|---|---|
 |PIG|3291|0.984|0.991|0.993|0.928|
 |COW|3291|0.929|0.911|0.974|0.889|
 
