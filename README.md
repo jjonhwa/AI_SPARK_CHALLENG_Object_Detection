@@ -103,7 +103,7 @@
 meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
         'lrf': (1, 0.01, 1.0),  # final OneCycleLR learning rate (lr0 * lrf)
         'momentum': (0.3, 0.6, 0.98),  # SGD momentum/Adam beta1
-        }  # segment copy-paste (probability)
+        }
 
         with open(opt.hyp, errors='ignore') as f:
             hyp = yaml.safe_load(f)  # load hyps dict
@@ -177,7 +177,7 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 - Optimizer
 
 ||Adam|AdamW|SGD|
-|---|---|---|
+|---|---|---|---|
 |mAP@.5|0.9635|0.9804|0.9848|
 |mAP@.5:.95|0.8302|0.8994|0.914|
 
