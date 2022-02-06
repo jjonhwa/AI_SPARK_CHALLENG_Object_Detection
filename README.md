@@ -23,6 +23,7 @@
 - **MultiLabelStratified KFold (Box count, Class, Box Ratio, Box Size)**
 - **HyperParameter Tuning (with GA Algorithm)**
 - **Data Augmentation with Error Analysis**
+- **Inference Tuning (IoU Threshold, Confidence Threshold)**
 
 ## EDA
 ### Cow Dataset vs Pig dataset
