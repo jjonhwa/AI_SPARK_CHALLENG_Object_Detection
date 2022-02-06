@@ -247,6 +247,12 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 |Full(Train + Valid)|0.9858|0.9271|
 |Split(Train)|0.9845|0.9215|
 
+## 시도했으나 아쉬웠던 점
+### Knowledge Distillation
+- 1 Stage Model to 1 Stage Model
+- 성능이 높은 1 Stage Model을 찾으려고 했으나 YOLOv5x6을 적용하였을 때, mAP@.5: 0.9821 / mAP@.5:.95: 0.939로 점수의 큰 개선이 없었음.
+- 즉, Teacher Model로 활용함으로서 얻어지는 이득이 적다.
+
 ## 회고
 - Pretrained Model
     - COCO Dataset에서의 Cow Image의 형태는 어떠한지? 
@@ -264,3 +270,5 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 - 고도화된 HyperParameter Tuning 기법 적용 (ex, Bayesian Algorithm)
 - Train Dataset에 대한 Silver Dataset을 만들어 이를 추가적으로 학습할 경우 성능 향상으로 이어지는지 알아보기 (Train Gold + Train Silver)
 - Object Detection에서 SGD가 AdamW보다 좋은 것은 경험적인 결과인지 혹은 연구결과가 있는지 확인하기
+- Pruning, Tensor Decomposition 적용해보기
+- Object Detection Knowledge Distillation의 경우, 2 Stage to 1 Stage에 대한 방법론 찾아보기
