@@ -67,6 +67,9 @@
 - **Inference Tuning (IoU Threshold, Confidence Threshold)**
 
 ## EDA
+<details>
+    <summary>자세히</summary>
+
 ### Cow Dataset vs Pig dataset
 ||PIG|COW|
 |---|---|---|
@@ -115,6 +118,8 @@
 - Cow Image에서 3개 존재
 - White Noise로 판단하여 삭제하지 않음.
 
+</details>
+    
 ## Model
 - YOLOv5m6 Pretrained Model 사용
 - YOLOv5 계열 Pretrained Model 중 100MB 이하인 Model 선정 
@@ -141,6 +146,9 @@
 - Runtime의 제약(Colab Pro)으로 인한, Mini Dataset(50% 사용) 제작 및 HyperParameter Search 개별화 작업진행
 
 ### Core Code 수정
+<details>
+    <summary>자세히</summary>
+
 ```python
 meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
         'lrf': (1, 0.01, 1.0),  # final OneCycleLR learning rate (lr0 * lrf)
@@ -202,6 +210,8 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
             results = train(hyp.copy(), opt, device, callbacks)
 ```
 
+</details>
+    
 ### Default HyperParameter vs Tuning HyperParameter
 - obj, box, cls에 대한 HyperParameter에 따른 성능 변화폭 증가
 (**NOTE: 학습 환경의 제약으로 인해, 각 성능비교표 마다 Epoch 수의 차이가 존재하여 성능의 차이가 있다. 성능 비교에만 참고하도록 하자**)
