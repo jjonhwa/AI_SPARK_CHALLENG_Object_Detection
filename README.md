@@ -261,7 +261,7 @@ meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
 - Silver Dataset
     - Silver Dataset을 만드는 과정에 있어서, IoU Threshold와 Confidence Threshold를 최적화한다면 성능개선으로 이어질 수 있지 않을까?
     - Test Datsaet에서 애초에 Labeling이 제대로 되어있지 않는다면, 이러한 이유로 인해 필연적으로 성능개선이 안 이루어질 수 있지 않을까?
-- MultiLabelStratifield SPlit
+- MultiLabelStratified SPlit
     - Bounding Box와 Ratio와 Size에 따른 분류를 함께 진행해보면 어떨까?
     - 더불어, Bounding Box의 경우, Image가 가지고 있는 Box마다 다른데 이는 어떻게 MultiLabel하게 Split할 수 있을까?   
 - 확실한 방법으로서 기존 Train Dataset에 Cow Image에 대한 Labeling을 직접했다면 성능 개선으로 이어지지 않았을까?!
