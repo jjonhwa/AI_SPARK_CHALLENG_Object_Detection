@@ -98,7 +98,7 @@
 - Genetic Algorithm을 활용한 HyperParameter Tuning (YOLOv5 default 제공)
 - Runtime의 제약(Colab Pro)으로 인한, Mini Dataset(50% 사용) 제작 및 HyperParameter Search 개별화 작업진행
 
-### Core Code 
+### Core Code 수정
 ```python
 meta = {'lr0': (1, 1e-5, 1e-1),  # initial learning rate (SGD=1E-2, Adam=1E-3)
         'lrf': (1, 0.01, 1.0),  # final OneCycleLR learning rate (lr0 * lrf)
